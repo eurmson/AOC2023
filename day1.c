@@ -1008,21 +1008,13 @@ char * input = "gsjgklneight6zqfz\n"
 
 int part1(char* string) {
     int total = 0;
-    char *num1 = NULL;
-    char *num2 = NULL;
+    char *num1 = NULL, *num2 = NULL;
     for(; *string != '\0'; string++) {
         if (*string == '\n') {
-            if (!num2) num2 = num1;
-            total += ((*num1 - '0') * 10) + (*num2 - '0');
-            num1 = NULL;
-            num2 = NULL;
-        } else if (isdigit(*string)) {
-            if (num1) {
-                num2 = string;
-            } else {
-                num1 = string;
-            }
-        }
+            total += ((*num1 - '0') * 10) + ((num2?*num2:*num1) - '0');
+            num2 = num1 = NULL;
+        } else if (isdigit(*string))
+            num1 ? (num2 = string) : (num1 = string);
     }
     return total;
 }
@@ -1031,31 +1023,17 @@ char * digits[9] = {"1","2","3","4","5","6","7","8","9"};
 
 int part2(char* string) {
     int total = 0;
-    char *num1 = NULL;
-    char *num2 = NULL;
+    char *num1 = NULL, *num2 = NULL;
     for(; *string != '\0'; string++) {
         if (*string == '\n') {
-            if (!num2) num2 = num1;
-            total += ((*num1 - '0') * 10) + (*num2 - '0');
-            num1 = NULL;
-            num2 = NULL;
-        } else if (isdigit(*string)) {
-            if (num1) {
-                num2 = string;
-            } else {
-                num1 = string;
-            }
-        } else {
-            for(int i = 0; i < 9; i++){
-                if (memcmp(digit_words[i], string, strlen(digit_words[i])) == 0) {
-                    if (num1) {
-                        num2 = digits[i];
-                    } else {
-                        num1 = digits[i];
-                    }
-                }
-            }
-        }
+            total += ((*num1 - '0') * 10) + ((num2?*num2:*num1) - '0');
+            num2 = num1 = NULL;
+        } else if (isdigit(*string))
+            num1 ? (num2 = string) : (num1 = string);
+        else
+            for(int i = 0; i < 9; i++)
+                if (memcmp(digit_words[i], string, strlen(digit_words[i])) == 0)
+                    num1 ? (num2 = digits[i]) : (num1 = digits[i]);
     }
     return total;
 }
