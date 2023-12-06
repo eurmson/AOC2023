@@ -9,3 +9,5 @@ add_executable(Day2 day2.c day2_input)
 add_executable(Day3 day3.c)
 
 add_executable(Day4 day4.c)
+
+add_executable(Day5 day5.c)
