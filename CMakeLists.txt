@@ -13,3 +13,5 @@ add_executable(Day4 day4.c)
 add_executable(Day5 day5.c)
 
 add_executable(Day6 day6.c)
+
+add_executable(Day7 day7.c)
