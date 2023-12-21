@@ -27,3 +27,5 @@ include_directories(${CURSES_INCLUDE_DIR})
 add_executable(Day10 day10.c)
 
 target_link_libraries(Day10 ${CURSES_LIBRARIES})
+
+add_executable(Day11 day11.c)
