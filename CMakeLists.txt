@@ -19,3 +19,11 @@ add_executable(Day7 day7.c)
 add_executable(Day8 day8.c)
 
 add_executable(Day9 day9.c)
+
+find_package(Curses REQUIRED)
+
+include_directories(${CURSES_INCLUDE_DIR})
+
+add_executable(Day10 day10.c)
+
+target_link_libraries(Day10 ${CURSES_LIBRARIES})
